@@ -86,7 +86,7 @@ class SpatialXFeatureLinear(nn.Module):
     def weight(self):
         c, w, h = self.in_shape
         n = self.outdims
-        weight = self.noormalized_spatial.expand(n, c, w, h) * self.features.expand(n, c, w, h)
+        weight = self.normalized_spatial.expand(n, c, w, h) * self.features.expand(n, c, w, h)
         weight = weight.view(self.outdims, -1)
         return weight
 
@@ -152,7 +152,7 @@ class WidthXHeightXFeatureLinear(nn.Module):
         if self.positive:
             positive(self.width)
         if self.normalize:
-            return self.width / (self.width.pow(2).sum(2).sqrt().expand_as(self.width) + self.eps)
+            return self.width / (self.width.pow(2).sum(2) + self.eps).sqrt().expand_as(self.width)
         else:
             return self.width
 
@@ -162,7 +162,7 @@ class WidthXHeightXFeatureLinear(nn.Module):
         if self.positive:
             positive(self.height)
         if self.normalize:
-            return self.height / (self.height.pow(2).sum(3).sqrt().expand_as(self.height) + self.eps)
+            return self.height / (self.height.pow(2).sum(3) + self.eps).sqrt().expand_as(self.height)
         else:
             return self.height
 
