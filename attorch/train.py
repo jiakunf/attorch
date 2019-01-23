@@ -46,7 +46,7 @@ def early_stopping(model, objective, interval=5, patience=20, start=0, max_iter=
         patience:  number of times the objective is allow to not become better before the iterator terminates
         start:     start value for iteration (used to check against `max_iter`)
         max_iter:  maximum number of iterations before the iterator terminated
-        maximize:  whether the objective is maximized of minimized
+        maximize:  whether the objective is maximized or minimized
         tolerance: margin by which the new objective score must improve to be considered as an update in best score
         switch_mode: whether to switch model's train mode into eval prior to objective evaluation. If True (default),
                      the model is switched to eval mode before objective evaluation and restored to its previous mode
